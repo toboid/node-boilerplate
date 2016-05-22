@@ -1,0 +1,35 @@
+{
+  "name": "",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "precompile": "rm -f dist/*",
+    "compile": "babel lib --out-dir dist",
+    "coverage": "nyc --require babel-core/register --reporter=lcov mocha ./test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "lint": "eslint 'lib/**' 'test/**'",
+    "test": "nyc --check-coverage --require babel-core/register mocha ./test",
+    "test-dist": "TEST_TARGET=dist mocha --require babel-core/register",
+    "watch": "chokidar 'lib/*.js' 'test/*.js' -c 'npm run lint && npm test'",
+    "ci": "npm run lint && npm run compile && npm run test-dist && npm run coverage",
+    "prepublish": "npm run compile"
+  },
+  "keywords": [],
+  "author": "toboid",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "latest",
+    "babel-core": "latest",
+    "babel-plugin-transform-object-assign": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-register": "latest",
+    "chai": "latest",
+    "chokidar-cli": "latest",
+    "coveralls": "latest",
+    "eslint": "latest",
+    "eslint-config-toboid": "latest",
+    "mocha": "latest",
+    "nyc": "latest"
+  },
+  "dependencies": {}
+}
